@@ -19,7 +19,7 @@
             "svdPath": "C:/Users/Nicho/.platformio/platforms/nxplpc-arduino-lpc176x/misc/svd/LPC176x5x_v0.2.svd",
             "preLaunchTask": {
                 "type": "PlatformIO",
-                "task": "Pre-Debug (LPC1769)"
+                "task": "Pre-Debug"
             }
         },
         {
@@ -31,6 +31,17 @@
             "toolchainBinDir": "C:/Users/Nicho/.platformio/packages/toolchain-gccarmnoneeabi/bin",
             "internalConsoleOptions": "openOnSessionStart",
             "svdPath": "C:/Users/Nicho/.platformio/platforms/nxplpc-arduino-lpc176x/misc/svd/LPC176x5x_v0.2.svd"
+        },
+        {
+            "type": "platformio-debug",
+            "request": "launch",
+            "name": "PIO Debug (without uploading)",
+            "executable": "c:/Users/Nicho/Documents/GitHub/Ender-3 Direct Drive/.pio/build/LPC1769/firmware.elf",
+            "projectEnvName": "LPC1769",
+            "toolchainBinDir": "C:/Users/Nicho/.platformio/packages/toolchain-gccarmnoneeabi/bin",
+            "internalConsoleOptions": "openOnSessionStart",
+            "svdPath": "C:/Users/Nicho/.platformio/platforms/nxplpc-arduino-lpc176x/misc/svd/LPC176x5x_v0.2.svd",
+            "loadMode": "manual"
         }
     ]
 }

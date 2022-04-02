@@ -238,8 +238,8 @@
  * THERMAL_PROTECTION_HYSTERESIS and/or THERMAL_PROTECTION_PERIOD
  */
 #if ENABLED(THERMAL_PROTECTION_HOTENDS)
-  #define THERMAL_PROTECTION_PERIOD 40        // Seconds
-  #define THERMAL_PROTECTION_HYSTERESIS 4     // Degrees Celsius
+  #define THERMAL_PROTECTION_PERIOD 120        // Seconds
+  #define THERMAL_PROTECTION_HYSTERESIS 5     // Degrees Celsius
 
   //#define ADAPTIVE_FAN_SLOWING              // Slow part cooling fan if temperature drops
   #if BOTH(ADAPTIVE_FAN_SLOWING, PIDTEMP)
@@ -437,7 +437,7 @@
  * Hotend Idle Timeout
  * Prevent filament in the nozzle from charring and causing a critical jam.
  */
-//#define HOTEND_IDLE_TIMEOUT
+#define HOTEND_IDLE_TIMEOUT
 #if ENABLED(HOTEND_IDLE_TIMEOUT)
   #define HOTEND_IDLE_TIMEOUT_SEC (5*60)    // (seconds) Time without extruder movement to trigger protection
   #define HOTEND_IDLE_MIN_TRIGGER   180     // (°C) Minimum temperature to enable hotend protection
@@ -496,7 +496,7 @@
  *
  * Define one or both of these to override the default 0-255 range.
  */
-#define FAN_MIN_PWM 51
+#define FAN_MIN_PWM 38
 //#define FAN_MAX_PWM 128
 
 /**
@@ -826,7 +826,7 @@
   // Define probe X and Y positions for Z1, Z2 [, Z3 [, Z4]]
   // If not defined, probe limits will be used.
   // Override with 'M422 S<index> X<pos> Y<pos>'
-  #define Z_STEPPER_ALIGN_XY { {  38, 117 }, { 197,  117 } }
+  //#define Z_STEPPER_ALIGN_XY { {  38, 117 }, { 197,  117 } }
 
   /**
    * Orientation for the automatically-calculated probe positions.
@@ -1235,10 +1235,10 @@
   //#define LCD_DECIMAL_SMALL_XY
 
   // Add an 'M73' G-code to set the current percentage
-  //#define LCD_SET_PROGRESS_MANUALLY
+  #define LCD_SET_PROGRESS_MANUALLY
 
   // Show the E position (filament used) during printing
-  //#define LCD_SHOW_E_TOTAL
+  #define LCD_SHOW_E_TOTAL
 #endif
 
 #if EITHER(SDSUPPORT, LCD_SET_PROGRESS_MANUALLY) && ANY(HAS_MARLINUI_U8GLIB, HAS_MARLINUI_HD44780, IS_TFTGLCD_PANEL, EXTENSIBLE_UI)
@@ -1283,7 +1283,7 @@
   //#define SD_IGNORE_AT_STARTUP            // Don't mount the SD card when starting up
   //#define SDCARD_READONLY                 // Read-only SD card (to save over 2K of flash)
 
-  //#define GCODE_REPEAT_MARKERS            // Enable G-code M808 to set repeat markers and do looping
+  #define GCODE_REPEAT_MARKERS            // Enable G-code M808 to set repeat markers and do looping
 
   #define SD_PROCEDURE_DEPTH 1              // Increase if you need more nested M32 calls
 
@@ -1315,9 +1315,9 @@
    * an option on the LCD screen to continue the print from the last-known
    * point in the file.
    */
-  //#define POWER_LOSS_RECOVERY
+  #define POWER_LOSS_RECOVERY
   #if ENABLED(POWER_LOSS_RECOVERY)
-    #define PLR_ENABLED_DEFAULT   false // Power Loss Recovery enabled by default. (Set with 'M413 Sn' & M500)
+    #define PLR_ENABLED_DEFAULT   true // Power Loss Recovery enabled by default. (Set with 'M413 Sn' & M500)
     //#define BACKUP_POWER_SUPPLY       // Backup power / UPS to move the steppers on power loss
     //#define POWER_LOSS_ZRAISE       2 // (mm) Z axis raise on resume (on power loss with UPS)
     //#define POWER_LOSS_PIN         44 // Pin to detect power loss. Set to -1 to disable default pin on boards without module.
@@ -1805,7 +1805,7 @@
   #if ENABLED(DOUBLECLICK_FOR_Z_BABYSTEPPING)
     #define DOUBLECLICK_MAX_INTERVAL 1250   // Maximum interval between clicks, in milliseconds.
                                             // Note: Extra time may be added to mitigate controller latency.
-    //#define MOVE_Z_WHEN_IDLE              // Jump to the move Z menu on doubleclick when printer is idle.
+   //#define MOVE_Z_WHEN_IDLE              // Jump to the move Z menu on doubleclick when printer is idle.
     #if ENABLED(MOVE_Z_WHEN_IDLE)
       #define MOVE_Z_IDLE_MULTIPLICATOR 1   // Multiply 1mm by this factor for the move step size.
     #endif
@@ -2100,13 +2100,13 @@
 // For debug-echo: 128 bytes for the optimal speed.
 // Other output doesn't need to be that speedy.
 // :[0, 2, 4, 8, 16, 32, 64, 128, 256]
-#define TX_BUFFER_SIZE 256
+#define TX_BUFFER_SIZE 128
 
 // Host Receive Buffer Size
 // Without XON/XOFF flow control (see SERIAL_XON_XOFF below) 32 bytes should be enough.
 // To use flow control, set this buffer size to at least 1024 bytes.
 // :[0, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]
-#define RX_BUFFER_SIZE 2048
+#define RX_BUFFER_SIZE 1024
 
 #if RX_BUFFER_SIZE >= 1024
   // Enable to have the controller send XON/XOFF control characters to
@@ -2131,7 +2131,7 @@
 // Dump an error to the serial port if the serial receive buffer overflows.
 // If you see these errors, increase the RX_BUFFER_SIZE value.
 // Not supported on all platforms.
-//#define RX_BUFFER_MONITOR
+#define RX_BUFFER_MONITOR
 
 /**
  * Emergency Command Parser
@@ -2528,7 +2528,7 @@
   #endif
 
   #if AXIS_IS_TMC(Z)
-    #define Z_CURRENT       508 // 70% of 725mA
+    #define Z_CURRENT       588 // 70% of 725mA
     #define Z_CURRENT_HOME  Z_CURRENT
     #define Z_MICROSTEPS     16
     #define Z_RSENSE          0.11
@@ -2537,7 +2537,7 @@
   #endif
 
   #if AXIS_IS_TMC(Z2)
-    #define Z2_CURRENT      508 // 70% of 725mA
+    #define Z2_CURRENT      588 // 70% of 725mA
     #define Z2_CURRENT_HOME Z2_CURRENT
     #define Z2_MICROSTEPS    Z_MICROSTEPS
     #define Z2_RSENSE         0.11
@@ -2565,7 +2565,7 @@
 
   #if AXIS_IS_TMC(E0)
     #define E0_CURRENT      1176 // 70% of 1680mA
-    #define E0_MICROSTEPS    32
+    #define E0_MICROSTEPS    16
     #define E0_RSENSE         0.11
     #define E0_CHAIN_POS     -1
     #define E0_INTERPOLATE true
